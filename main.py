@@ -1,6 +1,6 @@
 import requests
 from auth import *
-from datetime import datetime
+from datetime import datetime, timedelta
 
 GRAPH_ID = "graph1"
 
@@ -45,10 +45,32 @@ pixel_creation_endpoint = f"{pixela_endpoint}/{username}/graphs/{GRAPH_ID}"
 today = datetime.now()
 
 pixel_data = {
-    "date": today.strftime("%Y%m%d"),
-    "quantity": "10",
+    # "date": today.strftime("%Y%m%d"),
+    "date": "20230109",
+    "quantity": "44",
     "optionalData": '{"title":"Prisipažįstu", "author":"Jaume Cabré"}'
 }
 
-response = requests.post(url=pixel_creation_endpoint, json=pixel_data, headers=headers)
+# response = requests.post(url=pixel_creation_endpoint, json=pixel_data, headers=headers)
+# print(response.text)
+
+# update data
+
+
+pixel_update_endpoint = f"{pixela_endpoint}/{username}/graphs/{GRAPH_ID}/20230111"
+
+new_pixel_data = {
+    "quantity": "76",
+    "optionalData": '{"title":"Prisipažįstu", "author":"Jaume Cabré"}'
+}
+
+# response = requests.put(url=pixel_update_endpoint, json=new_pixel_data, headers=headers)
+# print(response.text)
+
+# delete pixel
+
+
+pixel_delete_endpoint = f"{pixela_endpoint}/{username}/graphs/{GRAPH_ID}/20230110"
+
+response = requests.delete(url=pixel_delete_endpoint, headers=headers)
 print(response.text)
