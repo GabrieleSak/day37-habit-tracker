@@ -45,14 +45,13 @@ pixel_creation_endpoint = f"{pixela_endpoint}/{username}/graphs/{GRAPH_ID}"
 today = datetime.now()
 
 pixel_data = {
-    # "date": today.strftime("%Y%m%d"),
-    "date": "20230109",
-    "quantity": "44",
+    "date": today.strftime("%Y%m%d"),
+    "quantity": input("How many pages did you read today?"),
     "optionalData": '{"title":"Prisipažįstu", "author":"Jaume Cabré"}'
 }
 
-# response = requests.post(url=pixel_creation_endpoint, json=pixel_data, headers=headers)
-# print(response.text)
+response = requests.post(url=pixel_creation_endpoint, json=pixel_data, headers=headers)
+print(response.text)
 
 # update data
 
@@ -70,7 +69,7 @@ new_pixel_data = {
 # delete pixel
 
 
-pixel_delete_endpoint = f"{pixela_endpoint}/{username}/graphs/{GRAPH_ID}/20230110"
+pixel_delete_endpoint = f"{pixela_endpoint}/{username}/graphs/{GRAPH_ID}/20230109"
 
-response = requests.delete(url=pixel_delete_endpoint, headers=headers)
-print(response.text)
+# response = requests.delete(url=pixel_delete_endpoint, headers=headers)
+# print(response.text)
