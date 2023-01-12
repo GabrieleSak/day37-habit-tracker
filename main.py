@@ -1,5 +1,8 @@
 import requests
 from auth import *
+from datetime import datetime
+
+GRAPH_ID = "graph1"
 
 # create user
 
@@ -21,7 +24,7 @@ user_params = {
 graph_endpoint = f"{pixela_endpoint}/{username}/graphs"
 
 graph_config = {
-    "id": "graph1",
+    "id": GRAPH_ID,
     "name": "Reading Graph",
     "unit": "Pages",
     "type": "int",
@@ -37,13 +40,15 @@ headers = {
 
 # post a pixel
 
-pixel_endpoint = f"{pixela_endpoint}/{username}/graphs/{graph_config['id']}"
+pixel_creation_endpoint = f"{pixela_endpoint}/{username}/graphs/{GRAPH_ID}"
 
-pixel_config = {
-    "date": "20230112",
+today = datetime.now()
+
+pixel_data = {
+    "date": today.strftime("%Y%m%d"),
     "quantity": "10",
     "optionalData": '{"title":"Prisipažįstu", "author":"Jaume Cabré"}'
 }
 
-response = requests.post(url=pixel_endpoint, json=pixel_config, headers=headers)
+response = requests.post(url=pixel_creation_endpoint, json=pixel_data, headers=headers)
 print(response.text)
